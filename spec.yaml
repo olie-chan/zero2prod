@@ -2,7 +2,7 @@ name: zero2prod
 region: fra
 services:
   - name: zero2prod
-    dockerfile_path: ./\.digital_ocean/Dockerfile
+    dockerfile_path: .digital_ocean/Dockerfile
     source_dir: .
     github:
       branch: main
