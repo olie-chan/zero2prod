@@ -36,7 +36,7 @@ async fn spawn_app() -> TestApp {
     let mut configuration = get_configuration().expect("Failed to read configuration");
     configuration.database.database_name = Uuid::new_v4().to_string();
 
-    let db_pool = configure_databse(&configuration.database).await;
+    let db_pool = configure_database(&configuration.database).await;
 
     let server = run(listener, db_pool.clone()).expect("Failed to bind address");
     let _ = tokio::spawn(server);
@@ -44,7 +44,7 @@ async fn spawn_app() -> TestApp {
     TestApp { address, db_pool }
 }
 
-pub async fn configure_databse(config: &DatabaseSettings) -> PgPool {
+pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
     let mut connection = PgConnection::connect_with(&config.without_db())
         .await
         .expect("Failed to connect to Postgres.");
